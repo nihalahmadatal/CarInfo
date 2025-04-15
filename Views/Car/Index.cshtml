@@ -1,0 +1,65 @@
+﻿@model IEnumerable<CarInfo.Models.TblCar>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h2 class="text-primary">Car List</h2>
+            @*@Html.ActionLink("➕ Create New", "Create", null, new { @class = "btn btn-success" })*@
+        </div>
+
+        <table class="table table-striped table-bordered table-hover shadow-sm">
+            <thead class="table-dark">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.First().Car_Name)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().Brand)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().Model)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().Price)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().Year)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().Transmission)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().Fuel_Type)</th>
+                    <th>@Html.DisplayNameFor(model => model.First().Features)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(modelItem => item.Car_Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Brand)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Model)</td>
+                        <td>$@Html.DisplayFor(modelItem => item.Price)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Year)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Transmission)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Fuel_Type)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Features)</td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                @Html.ActionLink("✏️ Edit", "EditCar", new { id = item.Car_Id }, new { @class = "btn btn-sm btn-warning me-2 rounded rounded-2" })
+                                @Html.ActionLink("🔍 Details", "CarDetails", new { id = item.Car_Id }, new { @class = "btn btn-sm btn-info text-white me-2 rounded rounded-2" })
+                                @Html.ActionLink("🗑️ Delete", "DeleteCar", new { id = item.Car_Id }, new { @class = "btn btn-sm btn-danger rounded rounded-2" })
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

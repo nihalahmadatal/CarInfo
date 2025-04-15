@@ -1,0 +1,107 @@
+﻿@model CarInfo.Models.TblCar
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>InsertCar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+
+</head>
+<body class="bg-light">
+    <div class="container mt-5">
+        <div class="card shadow-lg">
+            <div class="card-header bg-primary text-white">
+                <h4 class="mb-0">Car Information Form</h4>
+            </div>
+            <div class="card-body">
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "alert alert-danger" })
+
+                    <div class="mb-3">
+                        @Html.LabelFor(m => m.Car_Name, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.Car_Name, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Car_Name, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="mb-3">
+                        @Html.LabelFor(m => m.Brand, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.Brand, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Brand, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="mb-3">
+                        @Html.LabelFor(m => m.Model, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.Model, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(m => m.Model, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="mb-3">
+                        @Html.LabelFor(m => m.Price, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.Price, new { @class = "form-control", type = "number" })
+                        @Html.ValidationMessageFor(m => m.Price, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="mb-3">
+                        @Html.LabelFor(m => m.Year, new { @class = "form-label" })
+                        @Html.TextBoxFor(m => m.Year, new { @class = "form-control", type = "date" })
+                        @Html.ValidationMessageFor(m => m.Year, "", new { @class = "text-danger" })
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label d-block">Transmission:</label>
+                        <div class="form-check form-check-inline">
+                            @Html.RadioButtonFor(m => m.Transmission, "Manual", new { @class = "form-check-input", id = "transManual" })
+                            <label class="form-check-label" for="transManual">Manual</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            @Html.RadioButtonFor(m => m.Transmission, "Automatic", new { @class = "form-check-input", id = "transAuto" })
+                            <label class="form-check-label" for="transAuto">Automatic</label>
+                        </div>
+                    </div>
+
+                    <div class="mb-3">
+                        @Html.Label("Fuel Type", htmlAttributes: new { @class = "form-label" })
+                        @Html.DropDownListFor(m => m.Fuel_Type, new SelectList(
+                            new[] {
+                                new SelectListItem { Text = "-- Select --", Value = "" },
+                                new SelectListItem { Text = "Petrol", Value = "Petrol" },
+                                new SelectListItem { Text = "Diesel", Value = "Diesel" },
+                                new SelectListItem { Text = "Electric", Value = "Electric" },
+                                new SelectListItem { Text = "Hybrid", Value = "Hybrid" }
+                            }, "Value", "Text"), new { @class = "form-select" })
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Features (hold Ctrl to select multiple):</label>
+                        @Html.ListBoxFor(m => m.Features, new MultiSelectList(
+                            new[] { "Sunroof", "Bluetooth", "Backup Camera", "Navigation", "Heated Seats" }), new { @class = "form-select", size = "5" })
+                    </div>
+
+                    <div class="text-end">
+                        <input type="submit" value="Create" class="btn btn-success" />
+                    </div>
+                }
+
+                <div class="mt-3">
+                    @Html.ActionLink("← Back to List", "Index", null, new { @class = "btn btn-outline-secondary" })
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>  
